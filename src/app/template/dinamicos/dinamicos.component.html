@@ -2,7 +2,7 @@
 <hr>
 
 <form (ngSubmit)="save()" autocomplete="off" #myForm="ngForm">
-   
+
     <!-- Nombre -->
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Nombre</label>
@@ -18,15 +18,50 @@
         </div>
     </div>
 
+
+
+    <!-- Añadir favorito -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control"
+                    [(ngModel)]="newFavorite"
+                    name="favorito"
+                    placeholder="Agregar favorito">
+
+                <button class="btn btn-outline-primary" 
+                        type="button"
+                        (click)="addFavorite()">
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de favoritos -->
+    <div class="mb-3 row">
+        <div class="input-group mb-1" *ngFor="let favorito of persona.favoritos; let i = index">
+            <input class="form-control" [(ngModel)]="favorito.nombre" name="favorito_{{i}}">
+
+            <button class="btn btn-outline-danger" (click)="delete(i)" type="button"> Eliminar </button>
+        </div>
+
+    </div>
+
     <div class="row">
         <div class="col-sm-12">
             <button type="button"
-                    class="btn btn-primary float-end" [disabled]="myForm.invalid">
+                    class="btn btn-primary float-end"
+                    [disabled]="myForm.invalid"
+                    (click)="save()">
                 Guardar
             </button>
         </div>
     </div>
 
-
 </form>
+
+<span> Persona</span>
+<pre>{{persona|json}}</pre>
 
